@@ -82,7 +82,7 @@ func BuildAPI() *API {
 func (api *API) Serve(g *gin.Engine) error {
 
 	srv := &http.Server{
-		Addr:         fmt.Sprintf(":%s", api.config.Config.Port),
+		Addr:         fmt.Sprintf("localhost:%s", api.config.Config.Port),
 		Handler:      api.Routes(g),
 		IdleTimeout:  time.Minute,
 		ErrorLog:     log.New(api.logger, "", 0),
@@ -90,7 +90,7 @@ func (api *API) Serve(g *gin.Engine) error {
 		WriteTimeout: 30 * time.Second,
 	}
 
-	api.logger.Printf(fmt.Sprintf("starting server at http://localhost:%s", srv.Addr))
+	api.logger.Printf(fmt.Sprintf("starting server at http://%s", srv.Addr))
 	shutdownError := make(chan error)
 
 	go func() {

@@ -20,7 +20,7 @@ func NewSMSService(config *config.Settings, mqtt_client *mqtt_task.MQTTTask) *SM
 }
 
 func (s *SMSService) SendSMS(ctx context.Context, phone_number, message string) error {
-	topic := "/sms_gatewayx"
+	topic := ""
 	payload := map[string]string{
 		"phone":   phone_number,
 		"message": message,
